@@ -1,10 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Kafka\Protocol;
 
-use Kafka\Exception\NotSupported;
-use Kafka\Exception\Protocol as ProtocolException;
+use Hferradj\Kafka\Exception\NotSupported;
+use Hferradj\Kafka\Exception\Protocol as ProtocolException;
 use function substr;
 
 class Heartbeat extends Protocol
@@ -17,15 +18,15 @@ class Heartbeat extends Protocol
      */
     public function encode(array $payloads = []): string
     {
-        if (! isset($payloads['group_id'])) {
+        if (!isset($payloads['group_id'])) {
             throw new ProtocolException('given heartbeat data invalid. `group_id` is undefined.');
         }
 
-        if (! isset($payloads['generation_id'])) {
+        if (!isset($payloads['generation_id'])) {
             throw new ProtocolException('given heartbeat data invalid. `generation_id` is undefined.');
         }
 
-        if (! isset($payloads['member_id'])) {
+        if (!isset($payloads['member_id'])) {
             throw new ProtocolException('given heartbeat data invalid. `member_id` is undefined.');
         }
 

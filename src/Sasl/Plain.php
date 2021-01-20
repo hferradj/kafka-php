@@ -1,10 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Kafka\Sasl;
 
-use Kafka\CommonSocket;
-use Kafka\Protocol\Protocol;
+use Hferradj\Kafka\CommonSocket;
+use Hferradj\Kafka\Protocol\Protocol;
 use function trim;
 
 class Plain extends Mechanism

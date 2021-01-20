@@ -1,11 +1,12 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Kafka\Consumer;
 
 use Amp\Loop;
-use Kafka\ConsumerConfig;
-use Kafka\SingletonTrait;
+use Hferradj\Kafka\ConsumerConfig;
+use Hferradj\Kafka\SingletonTrait;
 use function array_keys;
 use function microtime;
 
@@ -117,7 +118,7 @@ class State
     private function removeWatchers(): void
     {
         foreach (array_keys($this->requests) as $request) {
-            if (! isset($this->requests[$request]['watcher'])) {
+            if (!isset($this->requests[$request]['watcher'])) {
                 return;
             }
 
@@ -130,7 +131,7 @@ class State
      */
     public function succRun(int $key, $context = null): void
     {
-        if (! isset($this->callStatus[$key])) {
+        if (!isset($this->callStatus[$key])) {
             return;
         }
 
@@ -152,7 +153,7 @@ class State
                 $this->callStatus[$key]['status'] = (self::STATUS_LOOP | self::STATUS_FINISH);
                 break;
             case self::REQUEST_OFFSET:
-                if (! isset($this->callStatus[$key]['context'])) {
+                if (!isset($this->callStatus[$key]['context'])) {
                     $this->callStatus[$key]['status'] = (self::STATUS_LOOP | self::STATUS_FINISH);
                     break;
                 }
@@ -163,7 +164,7 @@ class State
                 }
                 break;
             case self::REQUEST_FETCH:
-                if (! isset($this->callStatus[$key]['context'])) {
+                if (!isset($this->callStatus[$key]['context'])) {
                     $this->callStatus[$key]['status'] = (self::STATUS_LOOP | self::STATUS_FINISH);
                     break;
                 }
@@ -182,7 +183,7 @@ class State
      */
     public function failRun(int $key, $context = null): void
     {
-        if (! isset($this->callStatus[$key])) {
+        if (!isset($this->callStatus[$key])) {
             return;
         }
 
@@ -246,7 +247,7 @@ class State
 
     protected function checkRun(int $key): bool
     {
-        if (! isset($this->callStatus[$key])) {
+        if (!isset($this->callStatus[$key])) {
             return false;
         }
 
@@ -352,7 +353,7 @@ class State
      */
     protected function processing(int $key, $context): void
     {
-        if (! isset($this->callStatus[$key])) {
+        if (!isset($this->callStatus[$key])) {
             return;
         }
 

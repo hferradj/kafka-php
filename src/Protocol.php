@@ -1,7 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
-namespace Kafka;
+namespace Hferradj\Kafka;
 
 use Psr\Log\LoggerInterface;
 
@@ -193,11 +194,11 @@ class Protocol
     /**
      * @param mixed[] $payloads
      *
-     * @throws \Kafka\Exception
+     * @throws \Hferradj\Kafka\Exception
      */
     public static function encode(int $key, array $payloads): string
     {
-        if (! isset(self::$objects[$key])) {
+        if (!isset(self::$objects[$key])) {
             throw new Exception('Not support api key, key:' . $key);
         }
 
@@ -207,11 +208,11 @@ class Protocol
     /**
      * @return mixed[]
      *
-     * @throws \Kafka\Exception
+     * @throws \Hferradj\Kafka\Exception
      */
     public static function decode(int $key, string $data): array
     {
-        if (! isset(self::$objects[$key])) {
+        if (!isset(self::$objects[$key])) {
             throw new Exception('Not support api key, key:' . $key);
         }
 
@@ -220,7 +221,7 @@ class Protocol
 
     public static function getError(int $errCode): string
     {
-        if (! isset(self::PROTOCOL_ERROR_MAP[$errCode])) {
+        if (!isset(self::PROTOCOL_ERROR_MAP[$errCode])) {
             return 'Unknown error (' . $errCode . ')';
         }
 

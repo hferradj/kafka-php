@@ -1,11 +1,12 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Kafka\Sasl;
 
-use Kafka\CommonSocket;
-use Kafka\Exception;
-use Kafka\Protocol\Protocol as ProtocolTool;
+use Hferradj\Kafka\CommonSocket;
+use Hferradj\Kafka\Exception;
+use Hferradj\Kafka\Protocol\Protocol as ProtocolTool;
 use function base64_decode;
 use function base64_encode;
 use function chr;
@@ -70,11 +71,11 @@ class Scram extends Mechanism
     private $authMessage;
 
     /**
-     * @throws \Kafka\Exception
+     * @throws \Hferradj\Kafka\Exception
      */
     public function __construct(string $username, string $password, int $algorithm)
     {
-        if (! isset(self::ALLOW_SHA_ALGORITHM[$algorithm])) {
+        if (!isset(self::ALLOW_SHA_ALGORITHM[$algorithm])) {
             throw new Exception('Invalid hash algorithm given, it must be one of: [SCRAM_SHA_256, SCRAM_SHA_512].');
         }
 
@@ -84,7 +85,7 @@ class Scram extends Mechanism
     }
 
     /**
-     * @throws \Kafka\Exception
+     * @throws \Hferradj\Kafka\Exception
      * @throws \Exception
      */
     protected function performAuthentication(CommonSocket $socket): void
@@ -101,7 +102,7 @@ class Scram extends Mechanism
         $dataLen       = ProtocolTool::unpack(ProtocolTool::BIT_B32, $socket->readBlocking(4));
         $verifyMessage = $socket->readBlocking($dataLen);
 
-        if (! $this->verifyMessage($verifyMessage)) {
+        if (!$this->verifyMessage($verifyMessage)) {
             throw new Exception('Verify server final response message is failure');
         }
     }
@@ -126,7 +127,7 @@ class Scram extends Mechanism
     }
 
     /**
-     * @throws \Kafka\Exception
+     * @throws \Hferradj\Kafka\Exception
      */
     protected function finalMessage(string $challenge): string
     {
@@ -139,7 +140,7 @@ class Scram extends Mechanism
         $nonce = substr($challengeArray[0], 2);
         $salt  = base64_decode(substr($challengeArray[1], 2));
 
-        if (! $salt) {
+        if (!$salt) {
             throw new Exception('Server response challenge is invalid, paser salt is failure.');
         }
 
@@ -196,7 +197,7 @@ class Scram extends Mechanism
             return false;
         }
 
-        if (! preg_match($verifierRegexp, $data, $matches)) {
+        if (!preg_match($verifierRegexp, $data, $matches)) {
             return false;
         }
 

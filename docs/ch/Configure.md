@@ -38,8 +38,8 @@ Kafka-php 配置参数
 ```php
 <?php
 
-$config = \Kafka\ConsumerConfig::getInstance();
+$config = \Hferradj\Kafka\ConsumerConfig::getInstance();
 $config->setClientId('test');
 ```
 
-无论是消费模块还是生产模块，如果参数设置不符合规则时都会抛 `\Kafka\Exception\Config` 异常
+无论是消费模块还是生产模块，如果参数设置不符合规则时都会抛 `\Hferradj\Kafka\Exception\Config` 异常

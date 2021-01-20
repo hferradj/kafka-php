@@ -1,10 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Kafka\Consumer;
 
-use Kafka\Broker;
-use Kafka\SingletonTrait;
+use Hferradj\Kafka\Broker;
+use Hferradj\Kafka\SingletonTrait;
 use function count;
 
 class Assignment
@@ -107,17 +108,17 @@ class Assignment
             foreach ($partitionition as $partitionId => $leaderId) {
                 $memberNum = $count % $memberCount;
 
-                if (! isset($members[$memberNum])) {
+                if (!isset($members[$memberNum])) {
                     $members[$memberNum] = [];
                 }
 
-                if (! isset($members[$memberNum][$topicName])) {
+                if (!isset($members[$memberNum][$topicName])) {
                     $members[$memberNum][$topicName] = [];
                 }
 
                 $members[$memberNum][$topicName]['topic_name'] = $topicName;
 
-                if (! isset($members[$memberNum][$topicName]['partitions'])) {
+                if (!isset($members[$memberNum][$topicName]['partitions'])) {
                     $members[$memberNum][$topicName]['partitions'] = [];
                 }
 
@@ -226,7 +227,7 @@ class Assignment
 
     public function getConsumerOffset(string $topic, int $partition): ?int
     {
-        if (! isset($this->consumerOffsets[$topic][$partition])) {
+        if (!isset($this->consumerOffsets[$topic][$partition])) {
             return null;
         }
 

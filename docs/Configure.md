@@ -38,8 +38,8 @@ All of the above parameters are set by setXxx, for example, to set the `clientId
 ```php
 <?php
 
-$config = \Kafka\ConsumerConfig::getInstance();
+$config = \Hferradj\Kafka\ConsumerConfig::getInstance();
 $config->setClientId('test');
 ```
 
-Whether it is a consumer module or a production module, if the parameter settings do not match the rules will throw `\Kafka\Exception\Config` exception
+Whether it is a consumer module or a production module, if the parameter settings do not match the rules will throw `\Hferradj\Kafka\Exception\Config` exception

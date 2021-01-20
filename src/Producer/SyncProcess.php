@@ -1,13 +1,14 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Kafka\Producer;
 
-use Kafka\Broker;
-use Kafka\Exception;
-use Kafka\LoggerTrait;
-use Kafka\ProducerConfig;
-use Kafka\Protocol\Protocol;
+use Hferradj\Kafka\Broker;
+use Hferradj\Kafka\Exception;
+use Hferradj\Kafka\LoggerTrait;
+use Hferradj\Kafka\ProducerConfig;
+use Hferradj\Kafka\Protocol\Protocol;
 use Psr\Log\LoggerAwareTrait;
 use function array_keys;
 use function count;
@@ -30,7 +31,7 @@ class SyncProcess
         $this->recordValidator = $recordValidator ?? new RecordValidator();
 
         $config = $this->getConfig();
-        \Kafka\Protocol::init($config->getBrokerVersion(), $this->logger);
+        \Hferradj\Kafka\Protocol::init($config->getBrokerVersion(), $this->logger);
 
         $broker = $this->getBroker();
         $broker->setConfig($config);
@@ -43,7 +44,7 @@ class SyncProcess
      *
      * @return mixed[]
      *
-     * @throws \Kafka\Exception
+     * @throws \Hferradj\Kafka\Exception
      */
     public function send(array $recordSet): array
     {
@@ -81,14 +82,14 @@ class SyncProcess
             ];
 
             $this->debug('Send message start, params:' . json_encode($params));
-            $requestData = \Kafka\Protocol::encode(\Kafka\Protocol::PRODUCE_REQUEST, $params);
+            $requestData = \Hferradj\Kafka\Protocol::encode(\Hferradj\Kafka\Protocol::PRODUCE_REQUEST, $params);
             $connect->write($requestData);
 
             if ($requiredAck !== 0) { // If it is 0 the server will not send any response
                 $dataLen       = Protocol::unpack(Protocol::BIT_B32, $connect->read(4));
                 $recordSet     = $connect->read($dataLen);
                 $correlationId = Protocol::unpack(Protocol::BIT_B32, substr($recordSet, 0, 4));
-                $ret           = \Kafka\Protocol::decode(\Kafka\Protocol::PRODUCE_REQUEST, substr($recordSet, 4));
+                $ret           = \Hferradj\Kafka\Protocol::decode(\Hferradj\Kafka\Protocol::PRODUCE_REQUEST, substr($recordSet, 4));
 
                 $result[] = $ret;
             }
@@ -126,14 +127,14 @@ class SyncProcess
 
             $params = [];
             $this->debug('Start sync metadata request params:' . json_encode($params));
-            $requestData = \Kafka\Protocol::encode(\Kafka\Protocol::METADATA_REQUEST, $params);
+            $requestData = \Hferradj\Kafka\Protocol::encode(\Hferradj\Kafka\Protocol::METADATA_REQUEST, $params);
             $socket->write($requestData);
             $dataLen       = Protocol::unpack(Protocol::BIT_B32, $socket->read(4));
             $data          = $socket->read($dataLen);
             $correlationId = Protocol::unpack(Protocol::BIT_B32, substr($data, 0, 4));
-            $result        = \Kafka\Protocol::decode(\Kafka\Protocol::METADATA_REQUEST, substr($data, 4));
+            $result        = \Hferradj\Kafka\Protocol::decode(\Hferradj\Kafka\Protocol::METADATA_REQUEST, substr($data, 4));
 
-            if (! isset($result['brokers'], $result['topics'])) {
+            if (!isset($result['brokers'], $result['topics'])) {
                 throw new Exception('Get metadata is fail, brokers or topics is null.');
             }
 

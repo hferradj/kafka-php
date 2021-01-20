@@ -1,11 +1,12 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Kafka\Protocol;
 
-use Kafka\Exception\NotSupported;
-use Kafka\Exception\Protocol as ProtocolException;
-use Kafka\LoggerTrait;
+use Hferradj\Kafka\Exception\NotSupported;
+use Hferradj\Kafka\Exception\Protocol as ProtocolException;
+use Hferradj\Kafka\LoggerTrait;
 use Psr\Log\LoggerAwareTrait;
 use function array_map;
 use function array_shift;
@@ -307,12 +308,12 @@ abstract class Protocol
 
                 return self::API_VERSION0;
             case self::OFFSET_REQUEST:
-//                TODO: make it compatible with V1 of OFFSET_REQUEST
-//                if (version_compare($this->version, '0.10.1.0') >= 0) {
-//                    return self::API_VERSION1;
-//                } else {
-//                    return self::API_VERSION0;
-//                }
+                //                TODO: make it compatible with V1 of OFFSET_REQUEST
+                //                if (version_compare($this->version, '0.10.1.0') >= 0) {
+                //                    return self::API_VERSION1;
+                //                } else {
+                //                    return self::API_VERSION0;
+                //                }
                 return self::API_VERSION0;
             case self::GROUP_COORDINATOR_REQUEST:
                 return self::API_VERSION0;
@@ -331,7 +332,7 @@ abstract class Protocol
                     return self::API_VERSION1; // Offset Fetch Request v1 will fetch offset from Kafka
                 }
 
-                return self::API_VERSION0;//Offset Fetch Request v0 will fetch offset from zookeeper
+                return self::API_VERSION0; //Offset Fetch Request v0 will fetch offset from zookeeper
             case self::JOIN_GROUP_REQUEST:
                 if (version_compare($this->version, '0.10.1.0') >= 0) {
                     return self::API_VERSION1;
@@ -508,11 +509,11 @@ abstract class Protocol
             $value = substr($data, $offset);
             $ret   = $options !== null ? $func($value, $options) : $func($value);
 
-            if (! is_array($ret) && $ret === false) {
+            if (!is_array($ret) && $ret === false) {
                 break;
             }
 
-            if (! isset($ret['length'], $ret['data'])) {
+            if (!isset($ret['length'], $ret['data'])) {
                 throw new ProtocolException('Decode array failed, given function return format is invalid');
             }
             if ((int) $ret['length'] === 0) {

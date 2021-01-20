@@ -1,7 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
-namespace Kafka;
+namespace Hferradj\Kafka;
 
 use const STREAM_CLIENT_CONNECT;
 use function feof;
@@ -144,7 +145,7 @@ abstract class CommonSocket
 
         $this->stream = $this->createSocket($remoteSocket, $context, $errno, $errstr);
 
-        if (! is_resource($this->stream)) {
+        if (!is_resource($this->stream)) {
             throw new Exception(
                 sprintf('Could not connect to %s:%d (%s [%d])', $this->host, $this->port, $errstr, $errno)
             );
@@ -285,7 +286,7 @@ abstract class CommonSocket
             $res = $this->getMetaData();
             $this->close();
 
-            if (! empty($res['timed_out'])) {
+            if (!empty($res['timed_out'])) {
                 throw Exception\Socket::timedOut($length);
             }
 
@@ -344,7 +345,7 @@ abstract class CommonSocket
 
             if ($writable === 0) {
                 $res = $this->getMetaData();
-                if (! empty($res['timed_out'])) {
+                if (!empty($res['timed_out'])) {
                     throw new Exception('Timed out writing ' . $bytesToWrite . ' bytes to stream after writing ' . $bytesWritten . ' bytes');
                 }
 

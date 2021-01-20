@@ -1,14 +1,15 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Kafka\Producer;
 
 use Amp\Loop;
-use Kafka\Broker;
-use Kafka\Exception;
-use Kafka\LoggerTrait;
-use Kafka\ProducerConfig;
-use Kafka\Protocol;
+use Hferradj\Kafka\Broker;
+use Hferradj\Kafka\Exception;
+use Hferradj\Kafka\LoggerTrait;
+use Hferradj\Kafka\ProducerConfig;
+use Hferradj\Kafka\Protocol;
 use Psr\Log\LoggerAwareTrait;
 use function array_keys;
 use function count;
@@ -87,7 +88,7 @@ class Process
 
         $this->state->init();
 
-        if (! empty($broker->getTopics())) {
+        if (!empty($broker->getTopics())) {
             $this->state->succRun(State::REQUEST_METADATA);
         }
     }
@@ -132,7 +133,7 @@ class Process
     }
 
     /**
-     * @throws \Kafka\Exception
+     * @throws \Hferradj\Kafka\Exception
      */
     public function syncMeta(): void
     {
@@ -173,7 +174,7 @@ class Process
     /**
      * process Request
      *
-     * @throws \Kafka\Exception
+     * @throws \Hferradj\Kafka\Exception
      */
     protected function processRequest(string $data, int $fd): void
     {
@@ -182,7 +183,7 @@ class Process
             case Protocol::METADATA_REQUEST:
                 $result = Protocol::decode(Protocol::METADATA_REQUEST, substr($data, 4));
 
-                if (! isset($result['brokers'], $result['topics'])) {
+                if (!isset($result['brokers'], $result['topics'])) {
                     $this->error('Get metadata is fail, brokers or topics is null.');
                     $this->state->failRun(State::REQUEST_METADATA);
                     break;
@@ -323,7 +324,7 @@ class Process
             $partNums  = array_keys($topicMeta);
             shuffle($partNums);
 
-            $partId = ! isset($record['partId'], $topicMeta[$record['partId']]) ? $partNums[0] : $record['partId'];
+            $partId = !isset($record['partId'], $topicMeta[$record['partId']]) ? $partNums[0] : $record['partId'];
 
             $brokerId  = $topicMeta[$partId];
             $topicData = [];

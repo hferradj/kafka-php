@@ -1,10 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Kafka\Protocol;
 
-use Kafka\Exception\NotSupported;
-use Kafka\Exception\Protocol as ProtocolException;
+use Hferradj\Kafka\Exception\NotSupported;
+use Hferradj\Kafka\Exception\Protocol as ProtocolException;
 use function substr;
 use function time;
 
@@ -18,23 +19,23 @@ class CommitOffset extends Protocol
      */
     public function encode(array $payloads = []): string
     {
-        if (! isset($payloads['group_id'])) {
+        if (!isset($payloads['group_id'])) {
             throw new ProtocolException('given commit offset data invalid. `group_id` is undefined.');
         }
 
-        if (! isset($payloads['data'])) {
+        if (!isset($payloads['data'])) {
             throw new ProtocolException('given commit data invalid. `data` is undefined.');
         }
 
-        if (! isset($payloads['generation_id'])) {
+        if (!isset($payloads['generation_id'])) {
             $payloads['generation_id'] = -1;
         }
 
-        if (! isset($payloads['member_id'])) {
+        if (!isset($payloads['member_id'])) {
             $payloads['member_id'] = '';
         }
 
-        if (! isset($payloads['retention_time'])) {
+        if (!isset($payloads['retention_time'])) {
             $payloads['retention_time'] = -1;
         }
 
@@ -80,10 +81,10 @@ class CommitOffset extends Protocol
      */
     protected function encodeTopic(array $values): string
     {
-        if (! isset($values['topic_name'])) {
+        if (!isset($values['topic_name'])) {
             throw new ProtocolException('given commit offset data invalid. `topic_name` is undefined.');
         }
-        if (! isset($values['partitions'])) {
+        if (!isset($values['partitions'])) {
             throw new ProtocolException('given commit offset data invalid. `partitions` is undefined.');
         }
 
@@ -101,19 +102,19 @@ class CommitOffset extends Protocol
      */
     protected function encodePartition(array $values): string
     {
-        if (! isset($values['partition'])) {
+        if (!isset($values['partition'])) {
             throw new ProtocolException('given commit offset data invalid. `partition` is undefined.');
         }
 
-        if (! isset($values['offset'])) {
+        if (!isset($values['offset'])) {
             throw new ProtocolException('given commit offset data invalid. `offset` is undefined.');
         }
 
-        if (! isset($values['metadata'])) {
+        if (!isset($values['metadata'])) {
             $values['metadata'] = '';
         }
 
-        if (! isset($values['timestamp'])) {
+        if (!isset($values['timestamp'])) {
             $values['timestamp'] = time() * 1000;
         }
 

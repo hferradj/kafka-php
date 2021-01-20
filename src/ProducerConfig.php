@@ -1,9 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
-namespace Kafka;
+namespace Hferradj\Kafka;
 
-use Kafka\Protocol\Produce;
+use Hferradj\Kafka\Protocol\Produce;
 use function in_array;
 
 /**
@@ -37,7 +38,7 @@ class ProducerConfig extends Config
     ];
 
     /**
-     * @throws \Kafka\Exception\Config
+     * @throws \Hferradj\Kafka\Exception\Config
      */
     public function setRequestTimeout(int $requestTimeout): void
     {
@@ -49,7 +50,7 @@ class ProducerConfig extends Config
     }
 
     /**
-     * @throws \Kafka\Exception\Config
+     * @throws \Hferradj\Kafka\Exception\Config
      */
     public function setProduceInterval(int $produceInterval): void
     {
@@ -61,7 +62,7 @@ class ProducerConfig extends Config
     }
 
     /**
-     * @throws \Kafka\Exception\Config
+     * @throws \Hferradj\Kafka\Exception\Config
      */
     public function setTimeout(int $timeout): void
     {
@@ -73,7 +74,7 @@ class ProducerConfig extends Config
     }
 
     /**
-     * @throws \Kafka\Exception\Config
+     * @throws \Hferradj\Kafka\Exception\Config
      */
     public function setRequiredAck(int $requiredAck): void
     {
@@ -91,7 +92,7 @@ class ProducerConfig extends Config
 
     public function setCompression(int $compression): void
     {
-        if (! in_array($compression, self::COMPRESSION_OPTIONS, true)) {
+        if (!in_array($compression, self::COMPRESSION_OPTIONS, true)) {
             throw new Exception\Config('Compression must be one the Kafka\Protocol\Produce::COMPRESSION_* constants');
         }
 

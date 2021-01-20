@@ -1,11 +1,12 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Kafka\Consumer\StopStrategy;
 
 use Amp\Loop;
-use Kafka\Consumer;
-use Kafka\Consumer\StopStrategy;
+use Hferradj\Kafka\Consumer;
+use Hferradj\Kafka\Consumer\StopStrategy;
 
 final class Callback implements StopStrategy
 {
@@ -38,7 +39,7 @@ final class Callback implements StopStrategy
             function (string $watcherId) use ($consumer): void {
                 $shouldStop = (bool) ($this->callback)();
 
-                if (! $shouldStop) {
+                if (!$shouldStop) {
                     return;
                 }
 

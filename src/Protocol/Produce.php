@@ -1,10 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Kafka\Protocol;
 
-use Kafka\Exception\NotSupported;
-use Kafka\Exception\Protocol as ProtocolException;
+use Hferradj\Kafka\Exception\NotSupported;
+use Hferradj\Kafka\Exception\Protocol as ProtocolException;
 use Lcobucci\Clock\Clock;
 use Lcobucci\Clock\SystemClock;
 use function crc32;
@@ -48,7 +49,7 @@ class Produce extends Protocol
      */
     public function encode(array $payloads = []): string
     {
-        if (! isset($payloads['data'])) {
+        if (!isset($payloads['data'])) {
             throw new ProtocolException('given procude data invalid. `data` is undefined.');
         }
 
@@ -102,7 +103,7 @@ class Produce extends Protocol
             $encodedMessage = $this->encodeMessage($message);
 
             $data .= self::pack(self::BIT_B64, (string) $next)
-                   . self::encodeString($encodedMessage, self::PACK_INT32);
+                . self::encodeString($encodedMessage, self::PACK_INT32);
 
             ++$next;
         }
@@ -112,7 +113,7 @@ class Produce extends Protocol
         }
 
         return self::pack(self::BIT_B64, '0')
-             . self::encodeString($this->encodeMessage($data, $compression), self::PACK_INT32);
+            . self::encodeString($this->encodeMessage($data, $compression), self::PACK_INT32);
     }
 
     /**
@@ -200,11 +201,11 @@ class Produce extends Protocol
      */
     protected function encodeProducePartition(array $values, int $compression): string
     {
-        if (! isset($values['partition_id'])) {
+        if (!isset($values['partition_id'])) {
             throw new ProtocolException('given produce data invalid. `partition_id` is undefined.');
         }
 
-        if (! isset($values['messages']) || empty($values['messages'])) {
+        if (!isset($values['messages']) || empty($values['messages'])) {
             throw new ProtocolException('given produce data invalid. `messages` is undefined.');
         }
 
@@ -227,11 +228,11 @@ class Produce extends Protocol
      */
     protected function encodeProduceTopic(array $values, int $compression): string
     {
-        if (! isset($values['topic_name'])) {
+        if (!isset($values['topic_name'])) {
             throw new ProtocolException('given produce data invalid. `topic_name` is undefined.');
         }
 
-        if (! isset($values['partitions']) || empty($values['partitions'])) {
+        if (!isset($values['partitions']) || empty($values['partitions'])) {
             throw new ProtocolException('given produce data invalid. `partitions` is undefined.');
         }
 

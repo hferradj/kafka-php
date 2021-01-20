@@ -1,11 +1,12 @@
 <?php
+
 declare(strict_types=1);
 
-namespace Kafka;
+namespace Hferradj\Kafka;
 
 use Amp\Loop;
-use Kafka\Producer\Process;
-use Kafka\Producer\SyncProcess;
+use Hferradj\Kafka\Producer\Process;
+use Hferradj\Kafka\Producer\SyncProcess;
 use Psr\Log\LoggerAwareTrait;
 use function is_array;
 
@@ -29,7 +30,7 @@ class Producer
      *
      * @return mixed[]|null
      *
-     * @throws \Kafka\Exception
+     * @throws \Hferradj\Kafka\Exception
      */
     public function send($data = true): ?array
     {
@@ -51,11 +52,11 @@ class Producer
      *
      * @return mixed[]
      *
-     * @throws \Kafka\Exception
+     * @throws \Hferradj\Kafka\Exception
      */
     private function sendSynchronously(array $data): array
     {
-        if (! $this->process instanceof SyncProcess) {
+        if (!$this->process instanceof SyncProcess) {
             throw new Exception('An asynchronous process is not able to send messages synchronously');
         }
 
@@ -63,7 +64,7 @@ class Producer
     }
 
     /**
-     * @throws \Kafka\Exception
+     * @throws \Hferradj\Kafka\Exception
      */
     private function sendAsynchronously(bool $startLoop): void
     {

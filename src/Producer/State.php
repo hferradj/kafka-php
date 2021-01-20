@@ -1,11 +1,12 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Kafka\Producer;
 
 use Amp\Loop;
-use Kafka\ProducerConfig;
-use Kafka\SingletonTrait;
+use Hferradj\Kafka\ProducerConfig;
+use Hferradj\Kafka\SingletonTrait;
 use function array_keys;
 use function is_array;
 use function microtime;
@@ -73,8 +74,10 @@ class State
         }
 
         // start sync metadata
-        if (isset($request, $this->requests[self::REQUEST_METADATA]['func'])
-            && $this->callStatus[self::REQUEST_METADATA]['status'] === self::STATUS_LOOP) {
+        if (
+            isset($request, $this->requests[self::REQUEST_METADATA]['func'])
+            && $this->callStatus[self::REQUEST_METADATA]['status'] === self::STATUS_LOOP
+        ) {
             $context = $this->requests[self::REQUEST_METADATA]['func']();
             $this->processing($request, $context);
         }
@@ -88,7 +91,7 @@ class State
         $config = $this->getConfig();
         $isAsyn = $config->getIsAsyn();
 
-        if (! isset($this->callStatus[$key])) {
+        if (!isset($this->callStatus[$key])) {
             return;
         }
 
@@ -102,7 +105,7 @@ class State
                 break;
             case self::REQUEST_PRODUCE:
                 if ($context === null) {
-                    if (! $isAsyn) {
+                    if (!$isAsyn) {
                         $this->callStatus[$key]['status'] = self::STATUS_FINISH;
                         Loop::stop();
                     } else {
@@ -114,7 +117,7 @@ class State
                 $contextStatus = $this->callStatus[$key]['context'];
 
                 if (empty($contextStatus)) {
-                    if (! $isAsyn) {
+                    if (!$isAsyn) {
                         $this->callStatus[$key]['status'] = self::STATUS_FINISH;
                         Loop::stop();
                     } else {
@@ -127,7 +130,7 @@ class State
 
     public function failRun(int $key): void
     {
-        if (! isset($this->callStatus[$key])) {
+        if (!isset($this->callStatus[$key])) {
             return;
         }
 
@@ -156,14 +159,14 @@ class State
         $this->callStatus = [
             self::REQUEST_METADATA => $this->callStatus[self::REQUEST_METADATA],
             self::REQUEST_PRODUCE => [
-                'status'=> self::STATUS_LOOP,
+                'status' => self::STATUS_LOOP,
             ],
         ];
     }
 
     protected function checkRun(int $key): bool
     {
-        if (! isset($this->callStatus[$key])) {
+        if (!isset($this->callStatus[$key])) {
             return false;
         }
 
@@ -206,7 +209,7 @@ class State
      */
     protected function processing(int $key, $context): void
     {
-        if (! isset($this->callStatus[$key])) {
+        if (!isset($this->callStatus[$key])) {
             return;
         }
 

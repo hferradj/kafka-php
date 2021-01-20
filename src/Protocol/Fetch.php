@@ -1,11 +1,12 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Kafka\Protocol;
 
-use Kafka\Exception;
-use Kafka\Exception\NotSupported;
-use Kafka\Exception\Protocol as ProtocolException;
+use Hferradj\Kafka\Exception;
+use Hferradj\Kafka\Exception\NotSupported;
+use Hferradj\Kafka\Exception\Protocol as ProtocolException;
 use function array_merge;
 use function strlen;
 use function substr;
@@ -20,19 +21,19 @@ class Fetch extends Protocol
      */
     public function encode(array $payloads = []): string
     {
-        if (! isset($payloads['data'])) {
+        if (!isset($payloads['data'])) {
             throw new ProtocolException('given fetch kafka data invalid. `data` is undefined.');
         }
 
-        if (! isset($payloads['replica_id'])) {
+        if (!isset($payloads['replica_id'])) {
             $payloads['replica_id'] = -1;
         }
 
-        if (! isset($payloads['max_wait_time'])) {
+        if (!isset($payloads['max_wait_time'])) {
             $payloads['max_wait_time'] = 100; // default timeout 100ms
         }
 
-        if (! isset($payloads['min_bytes'])) {
+        if (!isset($payloads['min_bytes'])) {
             $payloads['min_bytes'] = 64 * 1024; // 64k
         }
 
@@ -146,7 +147,7 @@ class Fetch extends Protocol
                 break;
             }
 
-            if (! isset($ret['length'], $ret['data'])) {
+            if (!isset($ret['length'], $ret['data'])) {
                 throw new ProtocolException('Decode array failed, given function return format is invalid');
             }
 
@@ -281,15 +282,15 @@ class Fetch extends Protocol
      */
     protected function encodeFetchPartition(array $values): string
     {
-        if (! isset($values['partition_id'])) {
+        if (!isset($values['partition_id'])) {
             throw new ProtocolException('given fetch data invalid. `partition_id` is undefined.');
         }
 
-        if (! isset($values['offset'])) {
+        if (!isset($values['offset'])) {
             $values['offset'] = 0;
         }
 
-        if (! isset($values['max_bytes'])) {
+        if (!isset($values['max_bytes'])) {
             $values['max_bytes'] = 2 * 1024 * 1024;
         }
 
@@ -308,11 +309,11 @@ class Fetch extends Protocol
      */
     protected function encodeFetchTopic(array $values): string
     {
-        if (! isset($values['topic_name'])) {
+        if (!isset($values['topic_name'])) {
             throw new ProtocolException('given fetch data invalid. `topic_name` is undefined.');
         }
 
-        if (! isset($values['partitions']) || empty($values['partitions'])) {
+        if (!isset($values['partitions']) || empty($values['partitions'])) {
             throw new ProtocolException('given fetch data invalid. `partitions` is undefined.');
         }
 

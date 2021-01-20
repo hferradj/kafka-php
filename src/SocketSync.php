@@ -1,7 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
-namespace Kafka;
+namespace Hferradj\Kafka;
 
 use function fclose;
 use function is_resource;
@@ -36,7 +37,7 @@ class SocketSync extends CommonSocket
     /**
      * @param string|int $data
      *
-     * @throws \Kafka\Exception
+     * @throws \Hferradj\Kafka\Exception
      */
     public function read($data): string
     {
@@ -44,7 +45,7 @@ class SocketSync extends CommonSocket
     }
 
     /**
-     * @throws \Kafka\Exception
+     * @throws \Hferradj\Kafka\Exception
      */
     public function write(?string $buffer = null): int
     {

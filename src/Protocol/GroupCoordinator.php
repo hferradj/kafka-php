@@ -1,10 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Kafka\Protocol;
 
-use Kafka\Exception\NotSupported;
-use Kafka\Exception\Protocol as ProtocolException;
+use Hferradj\Kafka\Exception\NotSupported;
+use Hferradj\Kafka\Exception\Protocol as ProtocolException;
 use function substr;
 
 class GroupCoordinator extends Protocol
@@ -17,7 +18,7 @@ class GroupCoordinator extends Protocol
      */
     public function encode(array $payloads = []): string
     {
-        if (! isset($payloads['group_id'])) {
+        if (!isset($payloads['group_id'])) {
             throw new ProtocolException('given group coordinator invalid. `group_id` is undefined.');
         }
 

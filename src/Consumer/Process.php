@@ -1,14 +1,15 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Kafka\Consumer;
 
-use Kafka\Broker;
-use Kafka\ConsumerConfig;
-use Kafka\Exception;
-use Kafka\LoggerTrait;
-use Kafka\Protocol;
-use Kafka\Protocol\Protocol as ProtocolTool;
+use Hferradj\Kafka\Broker;
+use Hferradj\Kafka\ConsumerConfig;
+use Hferradj\Kafka\Exception;
+use Hferradj\Kafka\LoggerTrait;
+use Hferradj\Kafka\Protocol;
+use Hferradj\Kafka\Protocol\Protocol as ProtocolTool;
 use Psr\Log\LoggerAwareTrait;
 use function count;
 use function end;
@@ -119,7 +120,7 @@ class Process
             case Protocol::METADATA_REQUEST:
                 $result = Protocol::decode(Protocol::METADATA_REQUEST, substr($data, 4));
 
-                if (! isset($result['brokers'], $result['topics'])) {
+                if (!isset($result['brokers'], $result['topics'])) {
                     $this->error('Get metadata is fail, brokers or topics is null.');
                     $this->state->failRun(State::REQUEST_METADATA);
                     break;
@@ -134,7 +135,7 @@ class Process
             case Protocol::GROUP_COORDINATOR_REQUEST:
                 $result = Protocol::decode(Protocol::GROUP_COORDINATOR_REQUEST, substr($data, 4));
 
-                if (! isset($result['errorCode'], $result['coordinatorId']) || $result['errorCode'] !== Protocol::NO_ERROR) {
+                if (!isset($result['errorCode'], $result['coordinatorId']) || $result['errorCode'] !== Protocol::NO_ERROR) {
                     $this->state->failRun(State::REQUEST_GETGROUP);
                     break;
                 }

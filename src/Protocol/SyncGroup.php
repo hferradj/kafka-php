@@ -1,10 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Kafka\Protocol;
 
-use Kafka\Exception\NotSupported;
-use Kafka\Exception\Protocol as ProtocolException;
+use Hferradj\Kafka\Exception\NotSupported;
+use Hferradj\Kafka\Exception\Protocol as ProtocolException;
 use function substr;
 
 class SyncGroup extends Protocol
@@ -17,19 +18,19 @@ class SyncGroup extends Protocol
      */
     public function encode(array $payloads = []): string
     {
-        if (! isset($payloads['group_id'])) {
+        if (!isset($payloads['group_id'])) {
             throw new ProtocolException('given sync group data invalid. `group_id` is undefined.');
         }
 
-        if (! isset($payloads['generation_id'])) {
+        if (!isset($payloads['generation_id'])) {
             throw new ProtocolException('given sync group data invalid. `generation_id` is undefined.');
         }
 
-        if (! isset($payloads['member_id'])) {
+        if (!isset($payloads['member_id'])) {
             throw new ProtocolException('given sync group data invalid. `member_id` is undefined.');
         }
 
-        if (! isset($payloads['data'])) {
+        if (!isset($payloads['data'])) {
             throw new ProtocolException('given sync group data invalid. `data` is undefined.');
         }
 
@@ -92,19 +93,19 @@ class SyncGroup extends Protocol
      */
     protected function encodeGroupAssignment(array $values): string
     {
-        if (! isset($values['version'])) {
+        if (!isset($values['version'])) {
             throw new ProtocolException('given data invalid. `version` is undefined.');
         }
 
-        if (! isset($values['member_id'])) {
+        if (!isset($values['member_id'])) {
             throw new ProtocolException('given data invalid. `member_id` is undefined.');
         }
 
-        if (! isset($values['assignments'])) {
+        if (!isset($values['assignments'])) {
             throw new ProtocolException('given data invalid. `assignments` is undefined.');
         }
 
-        if (! isset($values['user_data'])) {
+        if (!isset($values['user_data'])) {
             $values['user_data'] = '';
         }
 
@@ -125,11 +126,11 @@ class SyncGroup extends Protocol
      */
     protected function encodeGroupAssignmentTopic(array $values): string
     {
-        if (! isset($values['topic_name'])) {
+        if (!isset($values['topic_name'])) {
             throw new ProtocolException('given data invalid. `topic_name` is undefined.');
         }
 
-        if (! isset($values['partitions'])) {
+        if (!isset($values['partitions'])) {
             throw new ProtocolException('given data invalid. `partitions` is undefined.');
         }
 

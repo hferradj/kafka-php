@@ -1,9 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Kafka\Exception;
 
-use Kafka\Exception;
+use Hferradj\Kafka\Exception;
 use function sprintf;
 
 final class Socket extends Exception

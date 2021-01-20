@@ -1,10 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Kafka\Protocol;
 
-use Kafka\Exception\NotSupported;
-use Kafka\Exception\Protocol as ProtocolException;
+use Hferradj\Kafka\Exception\NotSupported;
+use Hferradj\Kafka\Exception\Protocol as ProtocolException;
 use function array_shift;
 use function implode;
 use function in_array;
@@ -30,11 +31,11 @@ class SaslHandShake extends Protocol
     {
         $mechanism = array_shift($payloads);
 
-        if (! is_string($mechanism)) {
+        if (!is_string($mechanism)) {
             throw new ProtocolException('Invalid request SASL hand shake mechanism given. ');
         }
 
-        if (! in_array($mechanism, self::ALLOW_SASL_MECHANISMS, true)) {
+        if (!in_array($mechanism, self::ALLOW_SASL_MECHANISMS, true)) {
             throw new ProtocolException(
                 'Invalid request SASL hand shake mechanism given, it must be one of: ' . implode('|', self::ALLOW_SASL_MECHANISMS)
             );

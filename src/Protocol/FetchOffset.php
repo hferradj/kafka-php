@@ -1,10 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Kafka\Protocol;
 
-use Kafka\Exception\NotSupported;
-use Kafka\Exception\Protocol as ProtocolException;
+use Hferradj\Kafka\Exception\NotSupported;
+use Hferradj\Kafka\Exception\Protocol as ProtocolException;
 use function substr;
 
 class FetchOffset extends Protocol
@@ -17,11 +18,11 @@ class FetchOffset extends Protocol
      */
     public function encode(array $payloads = []): string
     {
-        if (! isset($payloads['data'])) {
+        if (!isset($payloads['data'])) {
             throw new ProtocolException('given fetch offset data invalid. `data` is undefined.');
         }
 
-        if (! isset($payloads['group_id'])) {
+        if (!isset($payloads['group_id'])) {
             throw new ProtocolException('given fetch offset data invalid. `group_id` is undefined.');
         }
 
@@ -58,11 +59,11 @@ class FetchOffset extends Protocol
      */
     protected function encodeOffsetTopic(array $values): string
     {
-        if (! isset($values['topic_name'])) {
+        if (!isset($values['topic_name'])) {
             throw new ProtocolException('given fetch offset data invalid. `topic_name` is undefined.');
         }
 
-        if (! isset($values['partitions']) || empty($values['partitions'])) {
+        if (!isset($values['partitions']) || empty($values['partitions'])) {
             throw new ProtocolException('given fetch offset data invalid. `partitions` is undefined.');
         }
 

@@ -1,10 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
-namespace Kafka;
+namespace Hferradj\Kafka;
 
 use Amp\Loop;
-use Kafka\Protocol\Protocol;
+use Hferradj\Kafka\Protocol\Protocol;
 use function fclose;
 use function feof;
 use function fread;
@@ -49,7 +50,7 @@ class Socket extends CommonSocket
 
     public function connect(): void
     {
-        if (! $this->isSocketDead()) {
+        if (!$this->isSocketDead()) {
             return;
         }
 
@@ -181,6 +182,6 @@ class Socket extends CommonSocket
      */
     protected function isSocketDead(): bool
     {
-        return ! is_resource($this->stream) || @feof($this->stream);
+        return !is_resource($this->stream) || @feof($this->stream);
     }
 }

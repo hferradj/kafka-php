@@ -1,11 +1,12 @@
 <?php
+
 declare(strict_types=1);
 
-namespace Kafka;
+namespace Hferradj\Kafka;
 
-use Kafka\Sasl\Gssapi;
-use Kafka\Sasl\Plain;
-use Kafka\Sasl\Scram;
+use Hferradj\Kafka\Sasl\Gssapi;
+use Hferradj\Kafka\Sasl\Plain;
+use Hferradj\Kafka\Sasl\Scram;
 use function array_keys;
 use function explode;
 use function in_array;
@@ -144,7 +145,7 @@ class Broker
         $nodeIds = array_keys($this->brokers);
         shuffle($nodeIds);
 
-        if (! isset($nodeIds[0])) {
+        if (!isset($nodeIds[0])) {
             return null;
         }
 
@@ -182,7 +183,7 @@ class Broker
             [$host, $port] = explode(':', $key);
         }
 
-        if ($host === null || $port === null || (! $modeSync && $this->process === null)) {
+        if ($host === null || $port === null || (!$modeSync && $this->process === null)) {
             return null;
         }
 
@@ -215,7 +216,7 @@ class Broker
     }
 
     /**
-     * @throws \Kafka\Exception
+     * @throws \Hferradj\Kafka\Exception
      */
     public function getSocket(string $host, int $port, bool $modeSync): CommonSocket
     {
@@ -230,7 +231,7 @@ class Broker
 
 
     /**
-     * @throws \Kafka\Exception
+     * @throws \Hferradj\Kafka\Exception
      */
     private function judgeConnectionConfig(): ?SaslMechanism
     {
@@ -250,7 +251,7 @@ class Broker
 
         $securityProtocol = $this->config->getSecurityProtocol();
 
-        $this->config->setSslEnable(! in_array($securityProtocol, $plainConnections, true));
+        $this->config->setSslEnable(!in_array($securityProtocol, $plainConnections, true));
 
         if (in_array($securityProtocol, $saslConnections, true)) {
             return $this->getSaslMechanismProvider($this->config);
@@ -260,7 +261,7 @@ class Broker
     }
 
     /**
-     * @throws \Kafka\Exception
+     * @throws \Hferradj\Kafka\Exception
      */
     private function getSaslMechanismProvider(Config $config): SaslMechanism
     {

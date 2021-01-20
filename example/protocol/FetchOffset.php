@@ -1,10 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 require '../../vendor/autoload.php';
 
-use Kafka\Protocol;
-use Kafka\Socket;
+use Hferradj\Kafka\Protocol;
+use Hferradj\Kafka\Socket;
 
 $data = [
     'group_id' => 'test',
@@ -22,7 +23,7 @@ var_dump(bin2hex($requestData));
 
 $socket = new Socket('127.0.0.1', '9192');
 $socket->setOnReadable(function ($data): void {
-    $coodid = \Kafka\Protocol\Protocol::unpack(\Kafka\Protocol\Protocol::BIT_B32, substr($data, 0, 4));
+    $coodid = \Hferradj\Kafka\Protocol\Protocol::unpack(\Hferradj\Kafka\Protocol\Protocol::BIT_B32, substr($data, 0, 4));
     $result = Protocol::decode(Protocol::OFFSET_FETCH_REQUEST, substr($data, 4));
     echo bin2hex(substr($data, 4));
     echo json_encode($result);

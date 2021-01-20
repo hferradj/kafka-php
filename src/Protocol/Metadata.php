@@ -1,10 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Kafka\Protocol;
 
-use Kafka\Exception\NotSupported;
-use Kafka\Exception\Protocol as ProtocolException;
+use Hferradj\Kafka\Exception\NotSupported;
+use Hferradj\Kafka\Exception\Protocol as ProtocolException;
 use function is_string;
 use function substr;
 
@@ -19,7 +20,7 @@ class Metadata extends Protocol
     public function encode(array $payloads = []): string
     {
         foreach ($payloads as $topic) {
-            if (! is_string($topic)) {
+            if (!is_string($topic)) {
                 throw new ProtocolException('request metadata topic array have invalid value. ');
             }
         }

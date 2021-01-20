@@ -1,7 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
-namespace Kafka;
+namespace Hferradj\Kafka;
 
 use Psr\Log\LogLevel;
 use Psr\Log\NullLogger;

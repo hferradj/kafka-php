@@ -1,11 +1,12 @@
 <?php
+
 declare(strict_types=1);
 
-namespace Kafka;
+namespace Hferradj\Kafka;
 
 use Amp\Loop;
-use Kafka\Consumer\Process;
-use Kafka\Consumer\StopStrategy;
+use Hferradj\Kafka\Consumer\Process;
+use Hferradj\Kafka\Consumer\StopStrategy;
 use Psr\Log\LoggerAwareTrait;
 
 class Consumer

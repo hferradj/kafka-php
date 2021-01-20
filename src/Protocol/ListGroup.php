@@ -1,9 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Kafka\Protocol;
 
-use Kafka\Exception\NotSupported;
+use Hferradj\Kafka\Exception\NotSupported;
 use function substr;
 
 class ListGroup extends Protocol

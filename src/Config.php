@@ -1,7 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
-namespace Kafka;
+namespace Hferradj\Kafka;
 
 use function array_filter;
 use function array_shift;
@@ -112,7 +113,7 @@ abstract class Config
         $isGetter = strpos($name, 'get') === 0 || strpos($name, 'iet') === 0;
         $isSetter = strpos($name, 'set') === 0;
 
-        if (! $isGetter && ! $isSetter) {
+        if (!$isGetter && !$isSetter) {
             return false;
         }
 
@@ -249,7 +250,7 @@ abstract class Config
      */
     public function setSslLocalCert(string $localCert): void
     {
-        if (! is_file($localCert)) {
+        if (!is_file($localCert)) {
             throw new Exception\Config('Set ssl local cert file is invalid');
         }
 
@@ -261,7 +262,7 @@ abstract class Config
      */
     public function setSslLocalPk(string $localPk): void
     {
-        if (! is_file($localPk)) {
+        if (!is_file($localPk)) {
             throw new Exception\Config('Set ssl local private key file is invalid');
         }
 
@@ -273,7 +274,7 @@ abstract class Config
      */
     public function setSslCafile(string $cafile): void
     {
-        if (! is_file($cafile)) {
+        if (!is_file($cafile)) {
             throw new Exception\Config('Set ssl ca file is invalid');
         }
 
@@ -285,7 +286,7 @@ abstract class Config
      */
     public function setSaslKeytab(string $keytab): void
     {
-        if (! is_file($keytab)) {
+        if (!is_file($keytab)) {
             throw new Exception\Config('Set sasl gssapi keytab file is invalid');
         }
 
@@ -297,7 +298,7 @@ abstract class Config
      */
     public function setSecurityProtocol(string $protocol): void
     {
-        if (! in_array($protocol, self::ALLOW_SECURITY_PROTOCOLS, true)) {
+        if (!in_array($protocol, self::ALLOW_SECURITY_PROTOCOLS, true)) {
             throw new Exception\Config('Invalid security protocol given.');
         }
 
@@ -309,7 +310,7 @@ abstract class Config
      */
     public function setSaslMechanism(string $mechanism): void
     {
-        if (! in_array($mechanism, self::ALLOW_MECHANISMS, true)) {
+        if (!in_array($mechanism, self::ALLOW_MECHANISMS, true)) {
             throw new Exception\Config('Invalid security sasl mechanism given.');
         }
 

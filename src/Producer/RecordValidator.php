@@ -1,9 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Kafka\Producer;
 
-use Kafka\Exception;
+use Hferradj\Kafka\Exception;
 use function is_string;
 use function trim;
 
@@ -18,11 +19,11 @@ final class RecordValidator
      */
     public function validate(array $record, array $topicList): void
     {
-        if (! isset($record['topic'])) {
+        if (!isset($record['topic'])) {
             throw Exception\InvalidRecordInSet::missingTopic();
         }
 
-        if (! is_string($record['topic'])) {
+        if (!is_string($record['topic'])) {
             throw Exception\InvalidRecordInSet::topicIsNotString();
         }
 
@@ -30,15 +31,15 @@ final class RecordValidator
             throw Exception\InvalidRecordInSet::missingTopic();
         }
 
-        if (! isset($topicList[$record['topic']])) {
+        if (!isset($topicList[$record['topic']])) {
             throw Exception\InvalidRecordInSet::nonExististingTopic($record['topic']);
         }
 
-        if (! isset($record['value'])) {
+        if (!isset($record['value'])) {
             throw Exception\InvalidRecordInSet::missingValue();
         }
 
-        if (! is_string($record['value'])) {
+        if (!is_string($record['value'])) {
             throw Exception\InvalidRecordInSet::valueIsNotString();
         }
 

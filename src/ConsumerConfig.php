@@ -1,7 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
-namespace Kafka;
+namespace Hferradj\Kafka;
 
 use function in_array;
 use function trim;
@@ -43,7 +44,7 @@ class ConsumerConfig extends Config
     ];
 
     /**
-     * @throws \Kafka\Exception\Config
+     * @throws \Hferradj\Kafka\Exception\Config
      */
     public function getGroupId(): string
     {
@@ -57,7 +58,7 @@ class ConsumerConfig extends Config
     }
 
     /**
-     * @throws \Kafka\Exception\Config
+     * @throws \Hferradj\Kafka\Exception\Config
      */
     public function setGroupId(string $groupId): void
     {
@@ -71,7 +72,7 @@ class ConsumerConfig extends Config
     }
 
     /**
-     * @throws \Kafka\Exception\Config
+     * @throws \Hferradj\Kafka\Exception\Config
      */
     public function setSessionTimeout(int $sessionTimeout): void
     {
@@ -83,7 +84,7 @@ class ConsumerConfig extends Config
     }
 
     /**
-     * @throws \Kafka\Exception\Config
+     * @throws \Hferradj\Kafka\Exception\Config
      */
     public function setRebalanceTimeout(int $rebalanceTimeout): void
     {
@@ -95,11 +96,11 @@ class ConsumerConfig extends Config
     }
 
     /**
-     * @throws \Kafka\Exception\Config
+     * @throws \Hferradj\Kafka\Exception\Config
      */
     public function setOffsetReset(string $offsetReset): void
     {
-        if (! in_array($offsetReset, ['latest', 'earliest'], true)) {
+        if (!in_array($offsetReset, ['latest', 'earliest'], true)) {
             throw new Exception\Config('Set offset reset value is invalid, must set it `latest` or `earliest`');
         }
 
@@ -109,7 +110,7 @@ class ConsumerConfig extends Config
     /**
      * @return string[]
      *
-     * @throws \Kafka\Exception\Config
+     * @throws \Hferradj\Kafka\Exception\Config
      */
     public function getTopics(): array
     {
@@ -125,7 +126,7 @@ class ConsumerConfig extends Config
     /**
      * @param string[] $topics
      *
-     * @throws \Kafka\Exception\Config
+     * @throws \Hferradj\Kafka\Exception\Config
      */
     public function setTopics(array $topics): void
     {
@@ -138,10 +139,10 @@ class ConsumerConfig extends Config
 
     public function setConsumeMode(int $mode): void
     {
-        if (! in_array($mode, [self::CONSUME_AFTER_COMMIT_OFFSET, self::CONSUME_BEFORE_COMMIT_OFFSET], true)) {
+        if (!in_array($mode, [self::CONSUME_AFTER_COMMIT_OFFSET, self::CONSUME_BEFORE_COMMIT_OFFSET], true)) {
             throw new Exception\Config(
                 'Invalid consume mode given, it must be either "ConsumerConfig::CONSUME_AFTER_COMMIT_OFFSET" or '
-                . '"ConsumerConfig::CONSUME_BEFORE_COMMIT_OFFSET"'
+                    . '"ConsumerConfig::CONSUME_BEFORE_COMMIT_OFFSET"'
             );
         }
 

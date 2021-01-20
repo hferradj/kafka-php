@@ -1,12 +1,13 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Kafka\Sasl;
 
 use GSSAPIContext;
-use Kafka\CommonSocket;
-use Kafka\Exception;
-use Kafka\Protocol\Protocol as ProtocolTool;
+use Hferradj\Kafka\CommonSocket;
+use Hferradj\Kafka\Exception;
+use Hferradj\Kafka\Protocol\Protocol as ProtocolTool;
 use KRB5CCache;
 use const GSS_C_INITIATE;
 use function extension_loaded;
@@ -41,15 +42,15 @@ class Gssapi extends Mechanism
 
     public static function fromKeytab(string $keytab, string $principal): self
     {
-        if (! extension_loaded('krb5')) {
+        if (!extension_loaded('krb5')) {
             throw new Exception('Extension "krb5" is required for "GSSAPI" authentication');
         }
 
-        if (! file_exists($keytab) || ! is_file($keytab)) {
+        if (!file_exists($keytab) || !is_file($keytab)) {
             throw new Exception('Invalid keytab, keytab file not exists.');
         }
 
-        if (! is_readable($keytab)) {
+        if (!is_readable($keytab)) {
             throw new Exception('Invalid keytab, keytab file disable read.');
         }
 
@@ -62,8 +63,8 @@ class Gssapi extends Mechanism
     }
 
     /**
-     * @throws \Kafka\Exception\NotSupported
-     * @throws \Kafka\Exception
+     * @throws \Hferradj\Kafka\Exception\NotSupported
+     * @throws \Hferradj\Kafka\Exception
      */
     protected function performAuthentication(CommonSocket $socket): void
     {
@@ -99,7 +100,7 @@ class Gssapi extends Mechanism
     {
         $token = '';
         $ret   = $this->gssapi->initSecContext($this->principal, null, null, null, $token);
-        if (! $ret) {
+        if (!$ret) {
             throw new Exception('Init security context failure.');
         }
         return $token;

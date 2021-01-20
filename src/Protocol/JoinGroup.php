@@ -1,10 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Kafka\Protocol;
 
-use Kafka\Exception\NotSupported;
-use Kafka\Exception\Protocol as ProtocolException;
+use Hferradj\Kafka\Exception\NotSupported;
+use Hferradj\Kafka\Exception\Protocol as ProtocolException;
 use function substr;
 
 class JoinGroup extends Protocol
@@ -17,27 +18,27 @@ class JoinGroup extends Protocol
      */
     public function encode(array $payloads = []): string
     {
-        if (! isset($payloads['group_id'])) {
+        if (!isset($payloads['group_id'])) {
             throw new ProtocolException('given join group data invalid. `group_id` is undefined.');
         }
 
-        if (! isset($payloads['session_timeout'])) {
+        if (!isset($payloads['session_timeout'])) {
             throw new ProtocolException('given join group data invalid. `session_timeout` is undefined.');
         }
 
-        if (! isset($payloads['member_id'])) {
+        if (!isset($payloads['member_id'])) {
             throw new ProtocolException('given join group data invalid. `member_id` is undefined.');
         }
 
-        if (! isset($payloads['data'])) {
+        if (!isset($payloads['data'])) {
             throw new ProtocolException('given join group data invalid. `data` is undefined.');
         }
 
-        if (! isset($payloads['protocol_type'])) {
+        if (!isset($payloads['protocol_type'])) {
             $payloads['protocol_type'] = 'consumer';
         }
 
-        if (! isset($payloads['rebalance_timeout'])) {
+        if (!isset($payloads['rebalance_timeout'])) {
             $payloads['rebalance_timeout'] = $payloads['session_timeout'];
         }
 
@@ -95,20 +96,20 @@ class JoinGroup extends Protocol
      */
     protected function encodeGroupProtocol(array $values): string
     {
-        if (! isset($values['protocol_name'])) {
+        if (!isset($values['protocol_name'])) {
             throw new ProtocolException('given join group data invalid. `protocol_name` is undefined.');
         }
 
         $protocolName = self::encodeString($values['protocol_name'], self::PACK_INT16);
 
-        if (! isset($values['version'])) {
+        if (!isset($values['version'])) {
             throw new ProtocolException('given data invalid. `version` is undefined.');
         }
 
-        if (! isset($values['subscription']) || empty($values['subscription'])) {
+        if (!isset($values['subscription']) || empty($values['subscription'])) {
             throw new ProtocolException('given data invalid. `subscription` is undefined.');
         }
-        if (! isset($values['user_data'])) {
+        if (!isset($values['user_data'])) {
             $values['user_data'] = '';
         }
 
