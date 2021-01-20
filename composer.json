@@ -23,13 +23,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Kafka\\": "src/"
+            "Hferradj\\Kafka\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "KafkaTest\\": "tests/",
-            "KafkaExample\\": "example/"
+            "Hferradj\\KafkaTest\\": "tests/",
+            "Hferradj\\KafkaExample\\": "example/"
         }
     },
     "suggest": {
