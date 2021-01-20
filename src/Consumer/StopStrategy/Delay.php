@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kafka\Consumer\StopStrategy;
+namespace Hferradj\Kafka\Consumer\StopStrategy;
 
 use Amp\Loop;
 use Hferradj\Kafka\Consumer;

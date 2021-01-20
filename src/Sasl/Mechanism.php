@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kafka\Sasl;
+namespace Hferradj\Kafka\Sasl;
 
 use Hferradj\Kafka\CommonSocket;
 use Hferradj\Kafka\Exception;

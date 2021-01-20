@@ -1,7 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
-namespace KafkaTest\Base\StreamStub;
+namespace Hferradj\KafkaTest\Base\StreamStub;
 
 use function str_repeat;
 use function strlen;

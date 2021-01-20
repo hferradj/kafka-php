@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kafka\Consumer;
+namespace Hferradj\Kafka\Consumer;
 
 use Hferradj\Kafka\Broker;
 use Hferradj\Kafka\ConsumerConfig;

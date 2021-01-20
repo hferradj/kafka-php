@@ -1,7 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
-namespace KafkaTest\Base\Producer;
+namespace Hferradj\KafkaTest\Base\Producer;
 
 use Kafka\Exception\InvalidRecordInSet;
 use Kafka\Producer\RecordValidator;
@@ -34,8 +35,8 @@ final class RecordValidatorTest extends TestCase
      */
     public function testInvalidRecordThrowsException(string $expectedExceptionMessage, array $record): void
     {
-            $this->expectException(InvalidRecordInSet::class);
-            $this->expectExceptionMessage($expectedExceptionMessage);
+        $this->expectException(InvalidRecordInSet::class);
+        $this->expectExceptionMessage($expectedExceptionMessage);
 
         $this->recordValidator->validate($record, ['test' => []]);
     }

@@ -1,7 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
-namespace KafkaTest\Base\Consumer;
+namespace Hferradj\KafkaTest\Base\Consumer;
 
 use Kafka\Consumer\State;
 use PHPUnit\Framework\TestCase;

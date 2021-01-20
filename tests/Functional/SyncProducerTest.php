@@ -1,7 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
-namespace KafkaTest\Functional;
+namespace Hferradj\KafkaTest\Functional;
 
 use Kafka\Producer;
 

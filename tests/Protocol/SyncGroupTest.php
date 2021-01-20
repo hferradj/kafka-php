@@ -1,7 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
-namespace KafkaTest\Protocol;
+namespace Hferradj\KafkaTest\Protocol;
 
 use Kafka\Protocol\SyncGroup;
 use PHPUnit\Framework\TestCase;
@@ -131,7 +132,7 @@ final class SyncGroupTest extends TestCase
             'member_id' => 'kafka-php-bd5d5bb2-2a1f-43d4-b831-b1510d81ac5c',
             'data' => [
                 [
-                    'version' => 0 ,
+                    'version' => 0,
                     'member_id' => 'kafka-php-bd5d5bb2-2a1f-43d4-b831-b1510d81ac5c',
                 ],
             ],
@@ -152,7 +153,7 @@ final class SyncGroupTest extends TestCase
             'member_id' => 'kafka-php-bd5d5bb2-2a1f-43d4-b831-b1510d81ac5c',
             'data' => [
                 [
-                    'version' => 0 ,
+                    'version' => 0,
                     'member_id' => 'kafka-php-bd5d5bb2-2a1f-43d4-b831-b1510d81ac5c',
                     'assignments' => [
                         [],
@@ -176,7 +177,7 @@ final class SyncGroupTest extends TestCase
             'member_id' => 'kafka-php-bd5d5bb2-2a1f-43d4-b831-b1510d81ac5c',
             'data' => [
                 [
-                    'version' => 0 ,
+                    'version' => 0,
                     'member_id' => 'kafka-php-bd5d5bb2-2a1f-43d4-b831-b1510d81ac5c',
                     'assignments' => [
                         ['topic_name' => 'test'],

@@ -1,7 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
-namespace KafkaTest\Functional\Ticket;
+namespace Hferradj\KafkaTest\Functional\Ticket;
 
 use Kafka\Exception\InvalidRecordInSet;
 use Kafka\Producer;
@@ -16,7 +17,7 @@ final class GH181Test extends TestCase
         $version = getenv('KAFKA_VERSION');
         $brokers = getenv('KAFKA_BROKERS');
 
-        if (! $version || ! $brokers) {
+        if (!$version || !$brokers) {
             self::markTestSkipped(
                 'Environment variables "KAFKA_VERSION" and "KAFKA_BROKERS" must be provided'
             );

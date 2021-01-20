@@ -1,7 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
-namespace KafkaTest\Base\Consumer\StopStrategy;
+namespace Hferradj\KafkaTest\Base\Consumer\StopStrategy;
 
 use Amp\Loop;
 use Kafka\Consumer;
@@ -30,7 +31,7 @@ final class CallbackTest extends TestCase
     public function setupShouldStopTheConsumerOnceTheCallbackReturnsTrue(): void
     {
         $this->consumer->expects($this->once())
-                       ->method('stop');
+            ->method('stop');
 
         $executionCount = 0;
 

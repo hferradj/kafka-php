@@ -1,7 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
-namespace KafkaTest\Functional;
+namespace Hferradj\KafkaTest\Functional;
 
 use Kafka\Consumer;
 use Kafka\Consumer\StopStrategy\Callback;
@@ -48,7 +49,7 @@ abstract class ProducerTest extends TestCase
         $this->topic    = getenv('KAFKA_TOPIC');
         $this->compress = getenv('KAFKA_COMPRESS') === '1';
 
-        if (! $this->version || ! $this->brokers || ! $this->topic) {
+        if (!$this->version || !$this->brokers || !$this->topic) {
             self::markTestSkipped(
                 'Environment variables "KAFKA_VERSION", "KAFKA_TOPIC", and "KAFKA_BROKERS" must be provided'
             );

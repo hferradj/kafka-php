@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kafka\Producer;
+namespace Hferradj\Kafka\Producer;
 
 use Hferradj\Kafka\Exception;
 use function is_string;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kafka\Exception;
+namespace Hferradj\Kafka\Exception;
 
 use Hferradj\Kafka\Exception;
 

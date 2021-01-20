@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kafka\Consumer;
+namespace Hferradj\Kafka\Consumer;
 
 use Amp\Loop;
 use Hferradj\Kafka\ConsumerConfig;

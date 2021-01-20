@@ -1,7 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
-namespace KafkaTest\Base;
+namespace Hferradj\KafkaTest\Base;
 
 use Amp\Loop;
 use Kafka\Consumer;
@@ -21,12 +22,12 @@ final class ConsumerTest extends TestCase
     public function createConsumer(?Consumer\StopStrategy $stopStrategy = null): void
     {
         $this->consumer = $this->getMockBuilder(Consumer::class)
-                               ->disableOriginalClone()
-                               ->disableArgumentCloning()
-                               ->disallowMockingUnknownTypes()
-                               ->setConstructorArgs([$stopStrategy])
-                               ->setMethods(['createProcess', 'error'])
-                               ->getMock();
+            ->disableOriginalClone()
+            ->disableArgumentCloning()
+            ->disallowMockingUnknownTypes()
+            ->setConstructorArgs([$stopStrategy])
+            ->setMethods(['createProcess', 'error'])
+            ->getMock();
     }
 
     /**
@@ -45,9 +46,9 @@ final class ConsumerTest extends TestCase
         };
 
         $this->consumer->expects($this->once())
-                       ->method('createProcess')
-                       ->with($callback)
-                       ->willReturn($this->createProcess($startCallback));
+            ->method('createProcess')
+            ->with($callback)
+            ->willReturn($this->createProcess($startCallback));
 
         $this->consumer->start($callback);
 
@@ -68,13 +69,13 @@ final class ConsumerTest extends TestCase
         };
 
         $this->consumer->expects($this->once())
-                       ->method('error')
-                       ->with('Consumer is already being executed');
+            ->method('error')
+            ->with('Consumer is already being executed');
 
         $this->consumer->expects($this->once())
-                       ->method('createProcess')
-                       ->with($callback)
-                       ->willReturn($this->createProcess($startCallback));
+            ->method('createProcess')
+            ->with($callback)
+            ->willReturn($this->createProcess($startCallback));
 
         $this->consumer->start($callback);
     }
@@ -102,9 +103,9 @@ final class ConsumerTest extends TestCase
         );
 
         $this->consumer->expects($this->once())
-                       ->method('createProcess')
-                       ->with($callback)
-                       ->willReturn($this->createProcess($startCallback, true));
+            ->method('createProcess')
+            ->with($callback)
+            ->willReturn($this->createProcess($startCallback, true));
 
         $this->consumer->start($callback);
 
@@ -124,9 +125,9 @@ final class ConsumerTest extends TestCase
         };
 
         $this->consumer->expects($this->once())
-                       ->method('createProcess')
-                       ->with($callback)
-                       ->willReturn($this->createProcess($startCallback, true));
+            ->method('createProcess')
+            ->with($callback)
+            ->willReturn($this->createProcess($startCallback, true));
 
         $this->consumer->start($callback);
     }
@@ -137,8 +138,8 @@ final class ConsumerTest extends TestCase
     public function stopShouldLogErrorWhenConsumerIsNotRunning(): void
     {
         $this->consumer->expects($this->once())
-                       ->method('error')
-                       ->with('Consumer is not running');
+            ->method('error')
+            ->with('Consumer is not running');
 
         $this->consumer->stop();
     }
@@ -154,7 +155,7 @@ final class ConsumerTest extends TestCase
         );
 
         $process->expects($expectsStop ? $this->once() : $this->never())
-                ->method('stop');
+            ->method('stop');
 
         return $process;
     }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kafka\Protocol;
+namespace Hferradj\Kafka\Protocol;
 
 use Hferradj\Kafka\Exception\NotSupported;
 use function substr;

@@ -1,7 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
-namespace KafkaTest\Base\Sasl;
+namespace Hferradj\KafkaTest\Base\Sasl;
 
 use Kafka\Sasl\Scram;
 use Kafka\Socket;

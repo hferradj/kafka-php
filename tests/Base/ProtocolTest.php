@@ -1,7 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
-namespace KafkaTest\Base;
+namespace Hferradj\KafkaTest\Base;
 
 use Kafka\Protocol;
 use PHPUnit\Framework\TestCase;

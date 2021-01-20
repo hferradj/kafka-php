@@ -1,7 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
-namespace KafkaTest\Base\Sasl;
+namespace Hferradj\KafkaTest\Base\Sasl;
 
 use Kafka\Sasl\Gssapi;
 use Kafka\Socket;
@@ -82,7 +83,7 @@ class GssapiTest extends TestCase
         $socket->method('readBlocking')
             ->will($this->onConsecutiveCalls(
                 // hand shake response data length
-                    hex2bin('00000037'),
+                hex2bin('00000037'),
                 $handShakeData,
                 $stokenLength,
                 $stokenData
@@ -120,14 +121,14 @@ class GssapiTest extends TestCase
         $context = $this->createMock(\GSSAPIContext::class);
 
         $context->expects($this->exactly($initTimes))
-                ->method('initSecContext')
-                ->with($principal, null, null, null, '')
-                ->willReturnCallback($initCallback);
+            ->method('initSecContext')
+            ->with($principal, null, null, null, '')
+            ->willReturnCallback($initCallback);
 
         $context->expects($this->exactly($wrapTimes))
-                ->method('wrap')
-                ->with(hex2bin('050401ff000c0000000000003661d1c10101000011e9d2da795b1800cdf2ffc7'))
-                ->willReturnCallback($wrapCallback);
+            ->method('wrap')
+            ->with(hex2bin('050401ff000c0000000000003661d1c10101000011e9d2da795b1800cdf2ffc7'))
+            ->willReturnCallback($wrapCallback);
 
         return $context;
     }

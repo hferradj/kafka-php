@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kafka\Producer;
+namespace Hferradj\Kafka\Producer;
 
 use Amp\Loop;
 use Hferradj\Kafka\Broker;
